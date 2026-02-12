@@ -1,4 +1,5 @@
-const div_parent = document.querySelector(".gridcont");
+const div_parent = document.querySelector(".gridcont"); // This is what moves
+const no_button = document.querySelector(".but_cont1 button"); // The actual NO button
 const S = document.getElementById("S");
 const SE = document.getElementById("SE");
 const SW = document.getElementById("SW");
@@ -7,76 +8,112 @@ const W = document.getElementById("W");
 const NE = document.getElementById("NE");
 const N = document.getElementById("N");
 const NW = document.getElementById("NW");
+const img = document.getElementById("image");
 let animationId = null;
 let currentY = 0;
 let currentX = 0;
-
-const DIV_SIZE = 150;
+let clicked = false;
 
 function isWithinBounds(newX, newY) {
-  const rect = div_parent.getBoundingClientRect();
-  const originalX = rect.left - currentX;
-  const originalY = rect.top - currentY;
+  const buttonRect = no_button.getBoundingClientRect();
+  const buttonWidth = buttonRect.width;
+  const buttonHeight = buttonRect.height;
 
-  const finalX = originalX + newX;
-  const finalY = originalY + newY;
+  // Calculate the original position of the button (before any transform)
+  const originalLeft = buttonRect.left - currentX;
+  const originalTop = buttonRect.top - currentY;
+
+  // Calculate where the button would be with the new transform
+  const finalLeft = originalLeft + newX;
+  const finalTop = originalTop + newY;
+  const finalRight = finalLeft + buttonWidth;
+  const finalBottom = finalTop + buttonHeight;
 
   return (
-    finalX >= 0 &&
-    finalX + DIV_SIZE <= window.innerWidth &&
-    finalY >= 0 &&
-    finalY + DIV_SIZE <= window.innerHeight
+    finalLeft >= 0 &&
+    finalRight <= window.innerWidth &&
+    finalTop >= 0 &&
+    finalBottom <= window.innerHeight
   );
 }
 
 function moveS() {
-  currentY += 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newY = currentY + 4;
+  if (isWithinBounds(currentX, newY)) {
+    currentY = newY;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveS);
 }
 
 function moveSE() {
-  currentY += 2;
-  currentX += 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newY = currentY + 4;
+  const newX = currentX + 4;
+  if (isWithinBounds(newX, newY)) {
+    currentY = newY;
+    currentX = newX;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveSE);
 }
 
 function moveSW() {
-  currentY += 2;
-  currentX -= 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newY = currentY + 4;
+  const newX = currentX - 4;
+  if (isWithinBounds(newX, newY)) {
+    currentY = newY;
+    currentX = newX;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveSW);
 }
 
 function moveE() {
-  currentX += 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newX = currentX + 4;
+  if (isWithinBounds(newX, currentY)) {
+    currentX = newX;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveE);
 }
+
 function moveW() {
-  currentX -= 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newX = currentX - 4;
+  if (isWithinBounds(newX, currentY)) {
+    currentX = newX;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveW);
 }
 
 function moveNE() {
-  currentY -= 2;
-  currentX += 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newY = currentY - 4;
+  const newX = currentX + 4;
+  if (isWithinBounds(newX, newY)) {
+    currentY = newY;
+    currentX = newX;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveNE);
 }
 
 function moveN() {
-  currentY -= 2;
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newY = currentY - 4;
+  if (isWithinBounds(currentX, newY)) {
+    currentY = newY;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveN);
 }
 
 function moveNW() {
-  currentY -= 2; // Move up (negative Y)
-  currentX -= 2; // Move left (negative X)
-  div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  const newY = currentY - 4;
+  const newX = currentX - 4;
+  if (isWithinBounds(newX, newY)) {
+    currentY = newY;
+    currentX = newX;
+    div_parent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  }
   animationId = requestAnimationFrame(moveNW);
 }
 
@@ -142,4 +179,21 @@ N.addEventListener("mouseleave", () => {
 
 NW.addEventListener("mouseleave", () => {
   cancelAnimationFrame(animationId);
+});
+
+no_button.addEventListener("mouseenter", () => {
+  if (!clicked) {
+    img.src = "nailong/images.jpeg";
+  }
+});
+
+no_button.addEventListener("mouseleave", () => {
+  if (!clicked) {
+    img.src = "nailong/cupid.jpg";
+  }
+});
+
+no_button.addEventListener("click", () => {
+  img.src = "nailong/iyak.jpg";
+  clicked = true;
 });
