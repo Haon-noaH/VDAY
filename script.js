@@ -1,5 +1,6 @@
 const div_parent = document.querySelector(".gridcont"); // This is what moves
 const no_button = document.querySelector(".but_cont1 button"); // The actual NO button
+const yes_button = document.getElementById("yes"); // The YES button
 const S = document.getElementById("S");
 const SE = document.getElementById("SE");
 const SW = document.getElementById("SW");
@@ -12,7 +13,8 @@ const img = document.getElementById("image");
 let animationId = null;
 let currentY = 0;
 let currentX = 0;
-let clicked = false;
+let no_clicked = false;
+let yes_clicked = false;
 
 function isWithinBounds(newX, newY) {
   const buttonRect = no_button.getBoundingClientRect();
@@ -182,18 +184,35 @@ NW.addEventListener("mouseleave", () => {
 });
 
 no_button.addEventListener("mouseenter", () => {
-  if (!clicked) {
+  if (!no_clicked) {
     img.src = "nailong/images.jpeg";
   }
 });
 
 no_button.addEventListener("mouseleave", () => {
-  if (!clicked) {
+  if (!no_clicked) {
     img.src = "nailong/cupid.jpg";
   }
 });
 
 no_button.addEventListener("click", () => {
   img.src = "nailong/iyak.jpg";
-  clicked = true;
+  no_clicked = true;
+});
+
+yes_button.addEventListener("mouseenter", () => {
+  if (!yes_clicked) {
+    img.src = "nailong/kilig sobra.jpg";
+  }
+});
+
+yes_button.addEventListener("mouseleave", () => {
+  if (!yes_clicked) {
+    img.src = "nailong/cupid.jpg";
+  }
+});
+
+yes_button.addEventListener("click", () => {
+  img.src = "nailong/kiss.jpg";
+  yes_clicked = true;
 });
