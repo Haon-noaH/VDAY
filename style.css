@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "heartland";
+  src: url("font/heart.TTF") format("truetype");
+}
+
 body {
   background-color: pink;
   height: 100vh;
@@ -11,9 +16,25 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.centertitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100px;
+  width: 650px;
+  background-color: rgb(243, 207, 246);
+  padding: 20px;
+  border-radius: 60px;
 }
 
 .gridcont {
@@ -39,7 +60,7 @@ body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 75%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -69,7 +90,23 @@ body {
 }
 
 p {
+  font-family: "heartland", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  color: rgb(238, 42, 42);
   width: 100vw;
   text-align: center;
-  margin: 50px 0 0 0;
+  vertical-align: middle;
+}
+
+button {
+  background-color: #e36aa2;
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border: none;
+  border-radius: 20px;
 }
