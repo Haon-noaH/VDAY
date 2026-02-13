@@ -185,34 +185,34 @@ NW.addEventListener("mouseleave", () => {
 
 no_button.addEventListener("mouseenter", () => {
   if (!no_clicked) {
-    img.src = "nailong/images.jpeg";
+    img.src = "nailong/images.png";
   }
 });
 
 no_button.addEventListener("mouseleave", () => {
   if (!no_clicked) {
-    img.src = "nailong/cupid.jpg";
+    img.src = "nailong/cupid.png";
   }
 });
 
 no_button.addEventListener("click", () => {
-  img.src = "nailong/iyak.jpg";
+  img.src = "nailong/iyak.png";
   no_clicked = true;
 });
 
 yes_button.addEventListener("mouseenter", () => {
   if (!yes_clicked) {
-    img.src = "nailong/kilig sobra.jpg";
+    img.src = "nailong/kilig sobra.png";
   }
 });
 
 yes_button.addEventListener("mouseleave", () => {
   if (!yes_clicked) {
-    img.src = "nailong/cupid.jpg";
+    img.src = "nailong/cupid.png";
   }
 });
 
 yes_button.addEventListener("click", () => {
-  img.src = "nailong/kiss.jpg";
+  img.src = "nailong/kiss.png";
   yes_clicked = true;
 });
