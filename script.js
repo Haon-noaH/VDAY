@@ -246,10 +246,10 @@ no_button.addEventListener("click", () => {
   no_clicked = true;
 
   // Grow YES button when NO is clicked
-  yesPaddingTop += 25;
-  yesPaddingSide += 40;
-  yesFontSize += 10;
-  yesBorderRadius += 20;
+  yesPaddingTop += 35;
+  yesPaddingSide += 55;
+  yesFontSize += 20;
+  yesBorderRadius += 35;
 
   yes_button.style.paddingTop = yesPaddingTop + "px";
   yes_button.style.paddingBottom = yesPaddingTop + "px";
