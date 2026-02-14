@@ -19,11 +19,14 @@ let currentX = 0;
 let no_clicked = false;
 let yes_clicked = false;
 
-// Starting values for YES button
+// Starting values for YES button (base size)
 let yesPaddingTop = 15;
 let yesPaddingSide = 32;
 let yesFontSize = 16;
 let yesBorderRadius = 20;
+
+// Track if currently hovering
+let isHovering = false;
 
 // Timeout variables for delays
 let noHoverTimeout = null;
@@ -247,17 +250,20 @@ no_button.addEventListener("click", () => {
   no_clicked = true;
 
   // Grow YES button when NO is clicked
-  yesPaddingTop += 35;
-  yesPaddingSide += 55;
-  yesFontSize += 20;
-  yesBorderRadius += 35;
   if (numclicked < 2) {
+    yesPaddingTop += 35;
+    yesPaddingSide += 55;
+    yesFontSize += 20;
+    yesBorderRadius += 35;
+
+    // Apply the new base size
     yes_button.style.paddingTop = yesPaddingTop + "px";
     yes_button.style.paddingBottom = yesPaddingTop + "px";
     yes_button.style.paddingLeft = yesPaddingSide + "px";
     yes_button.style.paddingRight = yesPaddingSide + "px";
     yes_button.style.fontSize = yesFontSize + "px";
     yes_button.style.borderRadius = yesBorderRadius + "px";
+
     numclicked += 1;
     console.log(numclicked);
   }
@@ -267,8 +273,9 @@ no_button.addEventListener("click", () => {
 yes_button.addEventListener("mouseenter", () => {
   clearTimeout(yesLeaveTimeout);
   yes_button.style.cursor = "pointer";
+  isHovering = true;
 
-  // Grow padding on hover
+  // Grow padding on hover by exactly 1px from current base
   yes_button.style.paddingTop = yesPaddingTop + 1 + "px";
   yes_button.style.paddingBottom = yesPaddingTop + 1 + "px";
   yes_button.style.paddingLeft = yesPaddingSide + 1 + "px";
@@ -293,8 +300,9 @@ yes_button.addEventListener("mouseenter", () => {
 
 yes_button.addEventListener("mouseleave", () => {
   clearTimeout(yesHoverTimeout);
+  isHovering = false;
 
-  // Reset to base padding
+  // Reset to exact base padding (no +1)
   yes_button.style.paddingTop = yesPaddingTop + "px";
   yes_button.style.paddingBottom = yesPaddingTop + "px";
   yes_button.style.paddingLeft = yesPaddingSide + "px";
@@ -318,23 +326,21 @@ yes_button.addEventListener("click", () => {
   yes_clicked = true;
 
   // Confetti animation for 3 seconds
-  const duration = 3000; // 3 seconds
+  const duration = 3000;
   const end = Date.now() + duration;
 
   (function frame() {
-    // Launch confetti from the top
     confetti({
       particleCount: 5,
-      angle: 90, // Straight down
+      angle: 90,
       spread: 100,
-      origin: { x: 0.5, y: 0 }, // Top center
-      startVelocity: 80, // Increase velocity to fall further
-      gravity: 2, // Adjust gravity for better fall
-      scalar: 1.2, // Make particles bigger
+      origin: { x: 0.5, y: 0 },
+      startVelocity: 80,
+      gravity: 2,
+      scalar: 1.2,
       colors: ["#ff69b4", "#ff1493", "#c71585", "#db7093", "#ffc0cb"],
     });
 
-    // Add confetti from left
     confetti({
       particleCount: 3,
       angle: 70,
@@ -346,7 +352,6 @@ yes_button.addEventListener("click", () => {
       colors: ["#ff69b4", "#ff1493", "#c71585", "#db7093", "#ffc0cb"],
     });
 
-    // Add confetti from right
     confetti({
       particleCount: 3,
       angle: 110,
