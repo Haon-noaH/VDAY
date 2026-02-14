@@ -12,6 +12,7 @@ const NW = document.getElementById("NW");
 const img = document.querySelector(".image");
 const title = document.querySelector(".title");
 
+let numclicked = 0;
 let animationId = null;
 let currentY = 0;
 let currentX = 0;
@@ -250,13 +251,15 @@ no_button.addEventListener("click", () => {
   yesPaddingSide += 55;
   yesFontSize += 20;
   yesBorderRadius += 35;
-
-  yes_button.style.paddingTop = yesPaddingTop + "px";
-  yes_button.style.paddingBottom = yesPaddingTop + "px";
-  yes_button.style.paddingLeft = yesPaddingSide + "px";
-  yes_button.style.paddingRight = yesPaddingSide + "px";
-  yes_button.style.fontSize = yesFontSize + "px";
-  yes_button.style.borderRadius = yesBorderRadius + "px";
+  if (numclicked < 2) {
+    yes_button.style.paddingTop = yesPaddingTop + "px";
+    yes_button.style.paddingBottom = yesPaddingTop + "px";
+    yes_button.style.paddingLeft = yesPaddingSide + "px";
+    yes_button.style.paddingRight = yesPaddingSide + "px";
+    yes_button.style.fontSize = yesFontSize + "px";
+    yes_button.style.borderRadius = yesBorderRadius + "px";
+    numclicked += 1;
+  }
 });
 
 // YES button with delay
