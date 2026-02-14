@@ -259,6 +259,7 @@ no_button.addEventListener("click", () => {
     yes_button.style.fontSize = yesFontSize + "px";
     yes_button.style.borderRadius = yesBorderRadius + "px";
     numclicked += 1;
+    console.log(numclicked);
   }
 });
 
