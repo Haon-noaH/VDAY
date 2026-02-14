@@ -204,6 +204,13 @@ no_button.addEventListener("mouseenter", () => {
   no_button.style.paddingLeft = "33px";
   no_button.style.paddingRight = "33px";
 
+  if (yes_clicked) {
+    noHoverTimeout = setTimeout(() => {
+      yes_clicked = false;
+      console.log("YES button reset to unclicked state");
+    }, 100);
+  }
+
   if (!no_clicked) {
     noHoverTimeout = setTimeout(() => {
       img.src = "nailong/images.png";
@@ -239,10 +246,10 @@ no_button.addEventListener("click", () => {
   no_clicked = true;
 
   // Grow YES button when NO is clicked
-  yesPaddingTop += 10;
-  yesPaddingSide += 20;
-  yesFontSize += 6;
-  yesBorderRadius += 10;
+  yesPaddingTop += 25;
+  yesPaddingSide += 40;
+  yesFontSize += 10;
+  yesBorderRadius += 20;
 
   yes_button.style.paddingTop = yesPaddingTop + "px";
   yes_button.style.paddingBottom = yesPaddingTop + "px";
@@ -262,6 +269,13 @@ yes_button.addEventListener("mouseenter", () => {
   yes_button.style.paddingBottom = yesPaddingTop + 1 + "px";
   yes_button.style.paddingLeft = yesPaddingSide + 1 + "px";
   yes_button.style.paddingRight = yesPaddingSide + 1 + "px";
+
+  if (no_clicked) {
+    yesHoverTimeout = setTimeout(() => {
+      no_clicked = false;
+      console.log("NO button reset to unclicked state");
+    }, 100);
+  }
 
   if (!yes_clicked) {
     yesHoverTimeout = setTimeout(() => {
@@ -298,4 +312,50 @@ yes_button.addEventListener("click", () => {
   title.style.color = "rgb(238, 42, 42)";
   title.style.fontFamily = "'heartland', cursive";
   yes_clicked = true;
+
+  // Confetti animation for 3 seconds
+  const duration = 3000; // 3 seconds
+  const end = Date.now() + duration;
+
+  (function frame() {
+    // Launch confetti from the top
+    confetti({
+      particleCount: 5,
+      angle: 90, // Straight down
+      spread: 100,
+      origin: { x: 0.5, y: 0 }, // Top center
+      startVelocity: 80, // Increase velocity to fall further
+      gravity: 2, // Adjust gravity for better fall
+      scalar: 1.2, // Make particles bigger
+      colors: ["#ff69b4", "#ff1493", "#c71585", "#db7093", "#ffc0cb"],
+    });
+
+    // Add confetti from left
+    confetti({
+      particleCount: 3,
+      angle: 70,
+      spread: 60,
+      origin: { x: 0, y: 0 },
+      startVelocity: 80,
+      gravity: 2,
+      scalar: 1.2,
+      colors: ["#ff69b4", "#ff1493", "#c71585", "#db7093", "#ffc0cb"],
+    });
+
+    // Add confetti from right
+    confetti({
+      particleCount: 3,
+      angle: 110,
+      spread: 60,
+      origin: { x: 1, y: 0 },
+      startVelocity: 80,
+      gravity: 2,
+      scalar: 1.2,
+      colors: ["#ff69b4", "#ff1493", "#c71585", "#db7093", "#ffc0cb"],
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
 });
